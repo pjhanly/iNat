@@ -1,0 +1,379 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: iNataturalist Observation Import</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for iNat {iNatTools}"><tr><td>iNat {iNatTools}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>iNataturalist Observation Import</h2>
+
+<h3>Description</h3>
+
+<p>Core function for pulling observation data from the iNaturalist API
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+iNat(per_page = 200, order = "desc", order_by = "created_at",
+  acc = NULL, captive = NULL, endemic = NULL, geo = NULL,
+  identified = NULL, introduced = NULL, mappable = NULL,
+  native = NULL, only_id = NULL, out_of_range = NULL, pcid = NULL,
+  photos = NULL, popular = NULL, taxon_is_active = NULL,
+  threatened = NULL, verifiable = "true", id = NULL, not_id = NULL,
+  place_id = NULL, project_id = NULL, rank = NULL, site_id = NULL,
+  taxon_id = NULL, without_taxon_id = NULL, taxon_name = NULL,
+  user_id = NULL, user_login = NULL, day = NULL, month = NULL,
+  year = NULL, term_id = NULL, term_value_id = NULL,
+  without_term_value_id = NULL, acc_above = NULL, acc_below = NULL,
+  d1 = NULL, d2 = NULL, created_d1 = NULL, created_d2 = NULL,
+  created_on = NULL, observed_on = NULL,
+  unobserved_by_user_id = NULL, apply_project_rules_for = NULL,
+  cs = NULL, csa = NULL, csi = NULL, geoprivacy = NULL,
+  taxon_geoprivacy = NULL, hrank = NULL, lrank = NULL,
+  id_above = NULL, id_below = NULL, identifications = NULL,
+  lat = NULL, lng = NULL, radius = NULL, nelat = NULL,
+  nelng = NULL, swlat = NULL, swlng = NULL, list_id = NULL,
+  not_in_project = NULL, not_matching_project_rules_for = NULL,
+  q = NULL, search_on = NULL, quality_grade = NULL,
+  updated_since = NULL, viewer_id = NULL, reviewed = NULL,
+  locale = NULL, preferred_place_id = NULL, ttl = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>per_page</code></td>
+<td>
+<p>Results requested per API request page. Cannot exceed 200</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>Query sort order. &quot;desc&quot; (default) for descending and &quot;asc&quot; for ascending</p>
+</td></tr>
+<tr valign="top"><td><code>order_by</code></td>
+<td>
+<p>Sorting field for order paramter. Options are &quot;created_at&quot; (default), &quot;observed_on&quot;, &quot;species_guess&quot;, &quot;votes&quot;, and &quot;id&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>acc</code></td>
+<td>
+<p>Positional accuracy is specified: &quot;true&quot; or &quot;false&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>captive</code></td>
+<td>
+<p>Fetch captive/cultivated observations: &quot;true&quot; or &quot;false&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>endemic</code></td>
+<td>
+<p>Fetch taxa endemic to location: &quot;true&quot; or &quot;false&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>geo</code></td>
+<td>
+<p>Fetch georeferenced observations: &quot;true&quot; or &quot;false&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>identified</code></td>
+<td>
+<p>Fetch observations with community IDs: &quot;true&quot; or &quot;false&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>introduced</code></td>
+<td>
+<p>Fetch taxa introduced to location: &quot;true&quot; or &quot;false&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>native</code></td>
+<td>
+<p>Fetch taxa native to location: &quot;true&quot; or &quot;false&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>only_id</code></td>
+<td>
+<p>Fetch only the record ID: &quot;true&quot; or &quot;false&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>out_of_range</code></td>
+<td>
+<p>Fetch taxa outside of known range: &quot;true&quot; or &quot;false&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>pcid</code></td>
+<td>
+<p>Fetch observations identified by project curators: &quot;true&quot; or &quot;false&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>photos</code></td>
+<td>
+<p>Fetch observations with photos: &quot;true&quot; or &quot;false&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>popular</code></td>
+<td>
+<p>Fetch only favorited observations: &quot;true&quot; or &quot;false&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>taxon_is_active</code></td>
+<td>
+<p>Fetch only taxa with active concepts: &quot;true&quot; or &quot;false&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>threatened</code></td>
+<td>
+<p>Fetch taxa threatened in their location: &quot;true&quot; or &quot;false&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>verifiable</code></td>
+<td>
+<p>Fetch only observations classified as Needs ID or are Research Grade: &quot;true&quot; or &quot;false&quot;. Default = &quot;true&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>Fetch a specific observation ID number</p>
+</td></tr>
+<tr valign="top"><td><code>not_id</code></td>
+<td>
+<p>Exclude a specific observation ID number from a fetch</p>
+</td></tr>
+<tr valign="top"><td><code>place_id</code></td>
+<td>
+<p>Fetch observations based on place ID</p>
+</td></tr>
+<tr valign="top"><td><code>project_id</code></td>
+<td>
+<p>Fetch observations from &quot;[project name]&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>rank</code></td>
+<td>
+<p>Fetch observations with a specific taxon rank. Example options are: &quot;kingdom&quot;, &quot;phylum&quot;, &quot;order&quot;, &quot;family&quot;, &quot;genus&quot;, &quot;species&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>site_id</code></td>
+<td>
+<p>Fetch observations from iNaturalist affiliate site ID</p>
+</td></tr>
+<tr valign="top"><td><code>taxon_id</code></td>
+<td>
+<p>Fetch observations of taxon ID and descendants</p>
+</td></tr>
+<tr valign="top"><td><code>without_taxon_id</code></td>
+<td>
+<p>Exclude fetching of observations of a taxon ID and descendants</p>
+</td></tr>
+<tr valign="top"><td><code>taxon_name</code></td>
+<td>
+<p>Fetch observations matching &quot;[common name]&quot; or &quot;[scientific name]&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>user_id</code></td>
+<td>
+<p>Fetch observations from user ID number</p>
+</td></tr>
+<tr valign="top"><td><code>user_login</code></td>
+<td>
+<p>Fetch observations by &quot;[user name]&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>day</code></td>
+<td>
+<p>Fetch observation from a given day</p>
+</td></tr>
+<tr valign="top"><td><code>month</code></td>
+<td>
+<p>Fetch observations from a given month</p>
+</td></tr>
+<tr valign="top"><td><code>year</code></td>
+<td>
+<p>Fetch observations from a given year</p>
+</td></tr>
+<tr valign="top"><td><code>term_id</code></td>
+<td>
+<p>Control term ID for annotations</p>
+</td></tr>
+<tr valign="top"><td><code>term_value_id</code></td>
+<td>
+<p>Combined with the term_id paramter to fetch observations with specific annotations</p>
+</td></tr>
+<tr valign="top"><td><code>without_term_value_id</code></td>
+<td>
+<p>Combined with the term_id parameter to exclude observations with specific annotations</p>
+</td></tr>
+<tr valign="top"><td><code>acc_above</code></td>
+<td>
+<p>Positional accuracy must be above this value (meters)</p>
+</td></tr>
+<tr valign="top"><td><code>acc_below</code></td>
+<td>
+<p>Positional accuracy must be below this value (meters)</p>
+</td></tr>
+<tr valign="top"><td><code>d1</code></td>
+<td>
+<p>Fetch observations created on or after a specific date: &quot;YYYY-MM-DD&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>d2</code></td>
+<td>
+<p>Fetch observations on or before a specific date: &quot;YYYY-MM-DD&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>created_d1</code></td>
+<td>
+<p>Fetch observations created on or after a specific date: &quot;YYYY-MM-DD&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>created_d2</code></td>
+<td>
+<p>Fetch observations created on or before a specific date: &quot;YYYY-MM-DD&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>created_on</code></td>
+<td>
+<p>Fetch observations created on a specific date: &quot;YYYY-MM-DD&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>observed_on</code></td>
+<td>
+<p>Fetch observations from a specific date: &quot;YYYY-MM-DD&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>unobserved_by_user_id</code></td>
+<td>
+<p>Fetch observations of taxa never observed by a user ID number</p>
+</td></tr>
+<tr valign="top"><td><code>apply_project_rules_for</code></td>
+<td>
+<p>Fetch observations that match rules of &quot;[project name]&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>cs</code></td>
+<td>
+<p>Fetch observations of taxa with a specific conservation status code. When the place_id parameter is specified, the status code will be specific to that location</p>
+</td></tr>
+<tr valign="top"><td><code>csa</code></td>
+<td>
+<p>Fetch observations of taxa with a conservation status code from a specific authority</p>
+</td></tr>
+<tr valign="top"><td><code>csi</code></td>
+<td>
+<p>Fetch observations of taxa with a specific IUCN conservation status. Options are &quot;LC&quot;, &quot;NT&quot;, &quot;VU&quot;, &quot;EN&quot;, &quot;CR&quot;, &quot;EW&quot;, &quot;EX&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>geoprivacy</code></td>
+<td>
+<p>Fetch observations with this geoprivacy setting: &quot;obscured&quot;, &quot;obscured_private&quot;, &quot;open&quot;, or &quot;private</p>
+</td></tr>
+<tr valign="top"><td><code>taxon_geoprivacy</code></td>
+<td>
+<p>Fetch observations with the specified most conservative geoprivacy applied by a conservation status: &quot;obscured&quot;, &quot;obscured_private&quot;, &quot;open&quot;, or &quot;private</p>
+</td></tr>
+<tr valign="top"><td><code>hrank</code></td>
+<td>
+<p>Fetch observations with this taxon rank or lower: Example options are: &quot;kingdom&quot;, &quot;phylum&quot;, &quot;order&quot;, &quot;family&quot;, &quot;genus&quot;, &quot;species&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>lrank</code></td>
+<td>
+<p>Fetch observations with this taxon rank or higher: Example options are: &quot;kingdom&quot;, &quot;phylum&quot;, &quot;order&quot;, &quot;family&quot;, &quot;genus&quot;, &quot;species&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>id_above</code></td>
+<td>
+<p>Fetch observations above this ID number</p>
+</td></tr>
+<tr valign="top"><td><code>id_below</code></td>
+<td>
+<p>Fetch observations below this ID number</p>
+</td></tr>
+<tr valign="top"><td><code>identifications</code></td>
+<td>
+<p>Fetch observations with identifications where: &quot;most_agree&quot;, &quot;most_disagree&quot;, &quot;some_agree&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>lat</code></td>
+<td>
+<p>Fetch observations within a specified radius of this latitude (decimal degrees)</p>
+</td></tr>
+<tr valign="top"><td><code>lng</code></td>
+<td>
+<p>Fetch observations within a specified radius of this longitude (decimal degrees)</p>
+</td></tr>
+<tr valign="top"><td><code>radius</code></td>
+<td>
+<p>Fetch observations within a kilometer radius of specified variables lat and lng</p>
+</td></tr>
+<tr valign="top"><td><code>nelat</code></td>
+<td>
+<p>Set northeast latitude (decimal degrees) of bounding box to fetch observations within</p>
+</td></tr>
+<tr valign="top"><td><code>nelng</code></td>
+<td>
+<p>Set norteast longitude (decimal degrees) of bounding box to fetch observations within</p>
+</td></tr>
+<tr valign="top"><td><code>swlat</code></td>
+<td>
+<p>Set southwest latitude (decimal degrees) of bounding box to fetch observations within</p>
+</td></tr>
+<tr valign="top"><td><code>swlng</code></td>
+<td>
+<p>Set southwest longitude (decimal degrees) of bounding box to fetch observations within</p>
+</td></tr>
+<tr valign="top"><td><code>list_id</code></td>
+<td>
+<p>Fetch taxon in list of IDs</p>
+</td></tr>
+<tr valign="top"><td><code>not_in_project</code></td>
+<td>
+<p>Fetch observations that are not in a given project ID</p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>String search of observation properties that can be combined with paramter search_on</p>
+</td></tr>
+<tr valign="top"><td><code>search_on</code></td>
+<td>
+<p>Properties to search on based on parameter q string query: &quot;names&quot;, &quot;tags&quot;, &quot;description&quot;, &quot;place&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>quality_grade</code></td>
+<td>
+<p>Fetch observations of this quality grade: &quot;casual&quot;, &quot;needs_id&quot;, &quot;research&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>updated_since</code></td>
+<td>
+<p>String query for fetching observations updated since a given time</p>
+</td></tr>
+<tr valign="top"><td><code>viewer_id</code></td>
+<td>
+<p>Fetch observations reviewed by a user ID</p>
+</td></tr>
+<tr valign="top"><td><code>reviewed</code></td>
+<td>
+<p>Fetch observation that have (&quot;true&quot;) or have no (&quot;false&quot;) been reviewed by the user specified in the viewer_id parameter</p>
+</td></tr>
+<tr valign="top"><td><code>locale</code></td>
+<td>
+<p>Specify locale preference for taxon common names</p>
+</td></tr>
+<tr valign="top"><td><code>preferred_place_id</code></td>
+<td>
+<p>Specify place preference for regional common names</p>
+</td></tr>
+<tr valign="top"><td><code>ttl</code></td>
+<td>
+<p>Specify the Cache-Control HTTP header in seconds</p>
+</td></tr>
+<tr valign="top"><td><code>mappaple</code></td>
+<td>
+<p>Fetch observations that can show on map tiles: &quot;true&quot; or &quot;false&quot;</p>
+</td></tr>
+<tr valign="top"><td><code>not_matching_projecT_rules_for</code></td>
+<td>
+<p>Fetch observations that do not match the rules of a project ID</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+Fetch all observations of Gastropoda (47114) for a user_id (473359):
+df &lt;- iNat(user_id = 473359, taxon_id = 47114)
+
+Fetch all observations of flowering dicots for a project:
+df &lt;- iNat(project="golden-ears-provincial-park", taxon_id = 47124, term_id = 12, term_value_id = 13)
+
+Fetch deer (Cervidae) observed on 2019-06-19
+df &lt;- iNat(taxon_id = 42158, observed_on = "2019-06-19")
+
+Fetch all observations created for a project for the first 3 days of May 2019:
+df &lt;- iNat(project="bowerbird",created_d1="2019-05-01",created_d2="2019-05-03")
+
+Fetch all observations of Felidae that have IUCN endangered status and are Research Grade:
+df &lt;- iNat(csi = "EN", taxon_id = 41944, quality_grade = "research")
+
+Fetch all monarch butterfly observations within a specific bounding box of latitude and longitude:
+df &lt;- iNat(taxon_id = 48662, nelat = 40, nelng = -94, swlat = 39, swlng = -95)
+
+Fetch all bird observations within a kilometer of the Empire State Building:
+df &lt;- iNat(taxon_id = 3, lat = 40.748424, lng = -73.985698, radius = 1)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>iNatTools</em> version 0.1.1 <a href="00Index.html">Index</a>]</div>
+</body></html>
